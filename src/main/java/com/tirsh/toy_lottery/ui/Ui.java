@@ -169,9 +169,6 @@ public class Ui {
     }
 
     private void createAddDialog(Toy toy) {
-        if (toy == null) {
-            toy = new Toy(null,null, 0, 0);
-        }
         addNewDialog = new JDialog(toyLotteryFrame, "Добавить новую игрушку", true);
         addNewDialog.setLayout(new FlowLayout());
 
@@ -188,10 +185,9 @@ public class Ui {
         addNewDialog.add(new JLabel("Введите вероятность:"));
         addNewDialog.add(dropFrequency);
         JButton submitButton = new JButton("OK");
-        Toy finalToy = toy;
         submitButton.addActionListener(e -> {
             if (title.getText().length() > 0 && isInt(quantity.getText()) && isInt(dropFrequency.getText())) {
-                dataController.save(new Toy(finalToy.getId(), title.getText(),
+                dataController.save(new Toy(toy.getId(), title.getText(),
                         Integer.parseInt(quantity.getText()), Integer.parseInt(dropFrequency.getText())));
             }
             addNewDialog.setVisible(false);
